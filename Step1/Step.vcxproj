@@ -104,6 +104,7 @@
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="f.h" />
     <ClInclude Include="graphics\OpenGLWnd.h" />
+    <ClInclude Include="HeptDlg.h" />
     <ClInclude Include="LineDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
@@ -114,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="graphics\OpenGLWnd.cpp" />
+    <ClCompile Include="HeptDlg.cpp" />
     <ClCompile Include="LineDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="stdafx.cpp">

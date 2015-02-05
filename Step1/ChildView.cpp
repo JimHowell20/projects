@@ -6,6 +6,7 @@
 #include "Step.h"
 #include "ChildView.h"
 #include "LineDlg.h"
+#include "HeptDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -21,6 +22,9 @@ CChildView::CChildView()
 	m_linefmy = 0.5;
 	m_linetox = 0.2;
 	m_linetoy = 0.55;
+
+	m_xpos = 0.0;
+	m_ypos = 0.0;
 }
 
 CChildView::~CChildView()
@@ -32,6 +36,7 @@ BEGIN_MESSAGE_MAP(CChildView, COpenGLWnd)
 	ON_WM_PAINT()
 	ON_COMMAND(ID_STEPSTUFF_LINEENDTO0, &CChildView::OnStepstuffLineendto0)
 	ON_COMMAND(ID_STEPSTUFF_LINEDIALOG, &CChildView::OnStepstuffLinedialog)
+	ON_COMMAND(ID_STEPSTUFF_HEPTAGON, &CChildView::OnStepstuffHeptagon)
 END_MESSAGE_MAP()
 
 
@@ -77,18 +82,18 @@ void CChildView::OnGLDraw(CDC * pDC)
 	glColor3d(0.5, 1.0, 0.0);
 	
 	glBegin(GL_LINE_STRIP);
-	glVertex2d(0.256, 0.274);
-	glVertex2d(0.745, 0.274);
-	glVertex2d(0.745, 0.75);
-	glVertex2d(0.256, 0.75);
-	glVertex2d(0.256, 0.274);
+	glVertex2d(m_xpos + 0.256, m_ypos + 0.274);
+	glVertex2d(m_xpos + 0.745, m_ypos + 0.274);
+	glVertex2d(m_xpos + 0.745, m_ypos + 0.75);
+	glVertex2d(m_xpos + 0.256, m_ypos + 0.75);
+	glVertex2d(m_xpos + 0.256, m_ypos + 0.274);
 	glEnd();
 
 	glColor3d(1.0, 0.5, 0.0);
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < 7; ++i) {
-		glVertex2d(0.5 + 0.25*sin(i / 7.0 * 2 * M_PI),
-			0.5 + 0.25*cos(i / 7.0 * 2 * M_PI));
+		glVertex2d(m_xpos + 0.5 + 0.25*sin(i / 7.0 * 2 * M_PI),
+			m_ypos + 0.5 + 0.25*cos(i / 7.0 * 2 * M_PI));
 	}
 	glEnd();
 	
@@ -132,6 +137,24 @@ void CChildView::OnStepstuffLinedialog()
 		m_linetox = dlg.m_tmx;
 		m_linetoy = dlg.m_tmy;
 
+		Invalidate();
+	}
+}
+
+
+void CChildView::OnStepstuffHeptagon()
+{
+	// TODO: Add your command handler code here
+
+	CHeptDlg dlg;
+
+	dlg.m_xpos = m_xpos;
+	dlg.m_ypos = m_ypos;
+
+	if (dlg.DoModal() == IDOK)
+	{
+		m_xpos = dlg.m_xpos;
+		m_ypos = dlg.m_ypos;
 		Invalidate();
 	}
 }

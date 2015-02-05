@@ -39,8 +39,13 @@ private:
 	double m_linefmy;
 	double m_linetox;
 	double m_linetoy;
+
+	double m_xpos;
+	double m_ypos;
+
 public:
 	afx_msg void OnStepstuffLineendto0();
 	afx_msg void OnStepstuffLinedialog();
+	afx_msg void OnStepstuffHeptagon();
 };
 
