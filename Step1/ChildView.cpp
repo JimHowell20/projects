@@ -39,6 +39,7 @@ BEGIN_MESSAGE_MAP(CChildView, COpenGLWnd)
 	ON_COMMAND(ID_STEPSTUFF_LINEENDTO0, &CChildView::OnStepstuffLineendto0)
 	ON_COMMAND(ID_STEPSTUFF_LINEDIALOG, &CChildView::OnStepstuffLinedialog)
 	ON_COMMAND(ID_STEPSTUFF_HEPTAGON, &CChildView::OnStepstuffHeptagon)
+	ON_COMMAND(ID_STEPSTUFF_ROTATE15DEGREES, &CChildView::OnStepstuffRotate15degrees)
 END_MESSAGE_MAP()
 
 
@@ -88,11 +89,11 @@ void CChildView::OnGLDraw(CDC * pDC)
 	double x_offset = m_xpos + 0.5;
 	double y_offset = m_ypos + 0.5;
 
-	double x1 = 0.256 - x_offset;
-	double y1 = 0.274 - y_offset;
+	double x1 = 0.256-0.5;
+	double y1 = 0.274-0.5;
 
-	double x2 = 0.745 - x_offset;
-	double y2 = 0.750 - y_offset;
+	double x2 = 0.745-0.5;
+	double y2 = 0.750-0.5;
 
 	double x1p = x1;
 	double y1p = y1;
@@ -118,12 +119,12 @@ void CChildView::OnGLDraw(CDC * pDC)
 	double x4r = x4p*cos(m_theta*D2RAD) - y4p*sin(m_theta*D2RAD);
 	double y4r = x4p*sin(m_theta*D2RAD) + y4p*cos(m_theta*D2RAD);
 
-
 	glVertex2d(x1r + x_offset, y1r + y_offset);
 	glVertex2d(x2r + x_offset, y2r + y_offset);
 	glVertex2d(x3r + x_offset, y3r + y_offset);
 	glVertex2d(x4r + x_offset, y4r + y_offset);
 	glVertex2d(x1r + x_offset, y1r + y_offset);
+
 	glEnd();
 
 	glColor3d(1.0, 0.5, 0.0);
@@ -193,4 +194,13 @@ void CChildView::OnStepstuffHeptagon()
 		m_theta = dlg.m_theta;
 		Invalidate();
 	}
+}
+
+
+void CChildView::OnStepstuffRotate15degrees()
+{
+	// TODO: Add your command handler code here
+	m_theta += 15;
+
+	Invalidate();
 }

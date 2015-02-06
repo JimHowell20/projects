@@ -50,5 +50,6 @@ public:
 	afx_msg void OnStepstuffLineendto0();
 	afx_msg void OnStepstuffLinedialog();
 	afx_msg void OnStepstuffHeptagon();
+	afx_msg void OnStepstuffRotate15degrees();
 };
 

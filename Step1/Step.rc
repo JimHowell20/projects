@@ -126,6 +126,7 @@ BEGIN
         MENUITEM "&Line end to 0.1, 0.1",       ID_STEPSTUFF_LINEENDTO0
         MENUITEM "Line Dialog",                 ID_STEPSTUFF_LINEDIALOG
         MENUITEM "Heptagon",                    ID_STEPSTUFF_HEPTAGON
+        MENUITEM "Rotate 15 Degrees",           ID_STEPSTUFF_ROTATE15DEGREES
     END
 END
 
