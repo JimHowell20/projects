@@ -45,6 +45,7 @@ private:
 	double m_xpos;
 	double m_ypos;
 	double m_theta;
+	double m_length;
 
 public:
 	afx_msg void OnStepstuffLineendto0();

@@ -24,9 +24,10 @@ CChildView::CChildView()
 	m_linetox = 0.2;
 	m_linetoy = 0.55;
 
-	m_xpos = 0.0;
-	m_ypos = 0.0;
+	m_xpos = 0.5;
+	m_ypos = 0.5;
 	m_theta = 0.0;
+	m_length = 1.0;
 }
 
 CChildView::~CChildView()
@@ -86,38 +87,38 @@ void CChildView::OnGLDraw(CDC * pDC)
 	
 	glBegin(GL_LINE_STRIP);
 
-	double x_offset = m_xpos + 0.5;
-	double y_offset = m_ypos + 0.5;
+	double x_offset = m_xpos;
+	double y_offset = m_ypos;
 
 	double x1 = 0.256-0.5;
-	double y1 = 0.274-0.5;
+	double y1 = 0.274 - 0.5;
 
-	double x2 = 0.745-0.5;
-	double y2 = 0.750-0.5;
+	double x2 = 0.745 - 0.5;
+	double y2 = 0.750 - 0.5;
 
 	double x1p = x1;
 	double y1p = y1;
 
-	double x1r = x1p*cos(m_theta*D2RAD) - y1p*sin(m_theta*D2RAD);
-	double y1r = x1p*sin(m_theta*D2RAD) + y1p*cos(m_theta*D2RAD);
+	double x1r = m_length*(x1p*cos(m_theta*D2RAD) - y1p*sin(m_theta*D2RAD));
+	double y1r = m_length*(x1p*sin(m_theta*D2RAD) + y1p*cos(m_theta*D2RAD));
 
 	double x2p = x2;
 	double y2p = y1;
 
-	double x2r = x2p*cos(m_theta*D2RAD) - y2p*sin(m_theta*D2RAD);
-	double y2r = x2p*sin(m_theta*D2RAD) + y2p*cos(m_theta*D2RAD);
+	double x2r = m_length*(x2p*cos(m_theta*D2RAD) - y2p*sin(m_theta*D2RAD));
+	double y2r = m_length*(x2p*sin(m_theta*D2RAD) + y2p*cos(m_theta*D2RAD));
 
 	double x3p = x2;
 	double y3p = y2;
 
-	double x3r = x3p*cos(m_theta*D2RAD) - y3p*sin(m_theta*D2RAD);
-	double y3r = x3p*sin(m_theta*D2RAD) + y3p*cos(m_theta*D2RAD);
+	double x3r = m_length*(x3p*cos(m_theta*D2RAD) - y3p*sin(m_theta*D2RAD));
+	double y3r = m_length*(x3p*sin(m_theta*D2RAD) + y3p*cos(m_theta*D2RAD));
 
 	double x4p = x1;
 	double y4p = y2;
 
-	double x4r = x4p*cos(m_theta*D2RAD) - y4p*sin(m_theta*D2RAD);
-	double y4r = x4p*sin(m_theta*D2RAD) + y4p*cos(m_theta*D2RAD);
+	double x4r = m_length*(x4p*cos(m_theta*D2RAD) - y4p*sin(m_theta*D2RAD));
+	double y4r = m_length*(x4p*sin(m_theta*D2RAD) + y4p*cos(m_theta*D2RAD));
 
 	glVertex2d(x1r + x_offset, y1r + y_offset);
 	glVertex2d(x2r + x_offset, y2r + y_offset);
@@ -127,13 +128,13 @@ void CChildView::OnGLDraw(CDC * pDC)
 
 	glEnd();
 
-	glColor3d(1.0, 0.5, 0.0);
+	glColor3d(1.0, 0.3, 0.0);
 	glBegin(GL_POLYGON);
 
 	for (int i = 0; i < 7; ++i)
 	{
-		double x = 0.25*sin((i/7.0)*2*M_PI);
-		double y = 0.25*cos((i/7.0)*2*M_PI);
+		double x = m_length* 0.25*sin((i/7.0)*2*M_PI);
+		double y = m_length* 0.25*cos((i/7.0)*2*M_PI);
 
 		double xp = x*cos(m_theta*D2RAD) - y*sin(m_theta*D2RAD);
 		double yp = x*sin(m_theta*D2RAD) + y*cos(m_theta*D2RAD);
@@ -186,12 +187,14 @@ void CChildView::OnStepstuffHeptagon()
 	dlg.m_xpos = m_xpos;
 	dlg.m_ypos = m_ypos;
 	dlg.m_theta = m_theta;
+	dlg.m_length = m_length;
 
 	if (dlg.DoModal() == IDOK)
 	{
 		m_xpos = dlg.m_xpos;
 		m_ypos = dlg.m_ypos;
 		m_theta = dlg.m_theta;
+		m_length = dlg.m_length;
 		Invalidate();
 	}
 }

@@ -16,6 +16,7 @@ CHeptDlg::CHeptDlg(CWnd* pParent /*=NULL*/)
 	, m_xpos(0)
 	, m_ypos(0)
 	, m_theta(0)
+	, m_length(0)
 {
 
 }
@@ -30,6 +31,7 @@ void CHeptDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_XPOS, m_xpos);
 	DDX_Text(pDX, IDC_YPOS, m_ypos);
 	DDX_Text(pDX, IDC_THETA, m_theta);
+	DDX_Text(pDX, IDC_LENGTH, m_length);
 }
 
 
