@@ -13,8 +13,9 @@
 #define IDC_TMX                         1002
 #define IDC_TMY                         1003
 #define IDC_XPOS                        1004
-#define IDC_EDIT2                       1005
 #define IDC_YPOS                        1005
+#define IDC_EDIT1                       1006
+#define IDC_THETA                       1006
 #define ID_STEPSTUFF_LINEENDTO0         32771
 #define ID_STEPSTUFF_LINEDIALOG         32772
 #define ID_STEPSTUFF_HEPTAGON           32773
@@ -25,7 +26,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        312
 #define _APS_NEXT_COMMAND_VALUE         32774
-#define _APS_NEXT_CONTROL_VALUE         1006
+#define _APS_NEXT_CONTROL_VALUE         1007
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

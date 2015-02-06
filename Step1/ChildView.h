@@ -15,6 +15,8 @@ class CChildView : public COpenGLWnd
 public:
 	CChildView();
 
+
+
 // Attributes
 public:
 
@@ -42,6 +44,7 @@ private:
 
 	double m_xpos;
 	double m_ypos;
+	double m_theta;
 
 public:
 	afx_msg void OnStepstuffLineendto0();

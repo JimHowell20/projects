@@ -14,6 +14,7 @@
 
 
 #define M_PI 3.14159265359
+#define D2RAD 0.0174532925
 
 // CChildView
 CChildView::CChildView()
@@ -25,6 +26,7 @@ CChildView::CChildView()
 
 	m_xpos = 0.0;
 	m_ypos = 0.0;
+	m_theta = 0.0;
 }
 
 CChildView::~CChildView()
@@ -82,30 +84,62 @@ void CChildView::OnGLDraw(CDC * pDC)
 	glColor3d(0.5, 1.0, 0.0);
 	
 	glBegin(GL_LINE_STRIP);
-	glVertex2d(m_xpos + 0.256, m_ypos + 0.274);
-	glVertex2d(m_xpos + 0.745, m_ypos + 0.274);
-	glVertex2d(m_xpos + 0.745, m_ypos + 0.75);
-	glVertex2d(m_xpos + 0.256, m_ypos + 0.75);
-	glVertex2d(m_xpos + 0.256, m_ypos + 0.274);
+
+	double x_offset = m_xpos + 0.5;
+	double y_offset = m_ypos + 0.5;
+
+	double x1 = 0.256 - x_offset;
+	double y1 = 0.274 - y_offset;
+
+	double x2 = 0.745 - x_offset;
+	double y2 = 0.750 - y_offset;
+
+	double x1p = x1;
+	double y1p = y1;
+
+	double x1r = x1p*cos(m_theta*D2RAD) - y1p*sin(m_theta*D2RAD);
+	double y1r = x1p*sin(m_theta*D2RAD) + y1p*cos(m_theta*D2RAD);
+
+	double x2p = x2;
+	double y2p = y1;
+
+	double x2r = x2p*cos(m_theta*D2RAD) - y2p*sin(m_theta*D2RAD);
+	double y2r = x2p*sin(m_theta*D2RAD) + y2p*cos(m_theta*D2RAD);
+
+	double x3p = x2;
+	double y3p = y2;
+
+	double x3r = x3p*cos(m_theta*D2RAD) - y3p*sin(m_theta*D2RAD);
+	double y3r = x3p*sin(m_theta*D2RAD) + y3p*cos(m_theta*D2RAD);
+
+	double x4p = x1;
+	double y4p = y2;
+
+	double x4r = x4p*cos(m_theta*D2RAD) - y4p*sin(m_theta*D2RAD);
+	double y4r = x4p*sin(m_theta*D2RAD) + y4p*cos(m_theta*D2RAD);
+
+
+	glVertex2d(x1r + x_offset, y1r + y_offset);
+	glVertex2d(x2r + x_offset, y2r + y_offset);
+	glVertex2d(x3r + x_offset, y3r + y_offset);
+	glVertex2d(x4r + x_offset, y4r + y_offset);
+	glVertex2d(x1r + x_offset, y1r + y_offset);
 	glEnd();
 
 	glColor3d(1.0, 0.5, 0.0);
 	glBegin(GL_POLYGON);
-	for (int i = 0; i < 7; ++i) {
-		glVertex2d(m_xpos + 0.5 + 0.25*sin(i / 7.0 * 2 * M_PI),
-			m_ypos + 0.5 + 0.25*cos(i / 7.0 * 2 * M_PI));
+
+	for (int i = 0; i < 7; ++i)
+	{
+		double x = 0.25*sin((i/7.0)*2*M_PI);
+		double y = 0.25*cos((i/7.0)*2*M_PI);
+
+		double xp = x*cos(m_theta*D2RAD) - y*sin(m_theta*D2RAD);
+		double yp = x*sin(m_theta*D2RAD) + y*cos(m_theta*D2RAD);
+
+		glVertex2d(xp+x_offset,yp+y_offset);
 	}
 	glEnd();
-	
-
-	glColor3d(1.0, 1.0, 0.0);
-
-	glBegin(GL_LINES);
-	glVertex2d(m_linefmx, m_linefmy);
-	glVertex2d(m_linetox, m_linetoy);
-
-	glEnd();
-
 }
 
 
@@ -150,11 +184,13 @@ void CChildView::OnStepstuffHeptagon()
 
 	dlg.m_xpos = m_xpos;
 	dlg.m_ypos = m_ypos;
+	dlg.m_theta = m_theta;
 
 	if (dlg.DoModal() == IDOK)
 	{
 		m_xpos = dlg.m_xpos;
 		m_ypos = dlg.m_ypos;
+		m_theta = dlg.m_theta;
 		Invalidate();
 	}
 }

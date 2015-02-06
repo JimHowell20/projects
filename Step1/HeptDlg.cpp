@@ -15,6 +15,7 @@ CHeptDlg::CHeptDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CHeptDlg::IDD, pParent)
 	, m_xpos(0)
 	, m_ypos(0)
+	, m_theta(0)
 {
 
 }
@@ -28,6 +29,7 @@ void CHeptDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_XPOS, m_xpos);
 	DDX_Text(pDX, IDC_YPOS, m_ypos);
+	DDX_Text(pDX, IDC_THETA, m_theta);
 }
 
 
